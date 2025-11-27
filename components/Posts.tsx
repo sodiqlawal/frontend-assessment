@@ -16,12 +16,12 @@ const Posts = () => {
   const searchParams = useSearchParams();
 
   const userId = params['user-id'];
-  const pageNumber = searchParams.get('pn') as string;
+  const pageParam = searchParams.get('page') as string;
 
   const queryClient = useQueryClient();
   const usersData = queryClient.getQueryData<User[]>([
     EQueryKey.users,
-    Number(pageNumber),
+    Number(pageParam),
   ]);
 
   const { data: posts, isLoading } = useQuery({
@@ -38,7 +38,7 @@ const Posts = () => {
 
   const breadCrumbs = useMemo(
     () => [
-      { title: 'Users', href: '/users' },
+      { title: 'Users', href: `/users?page=${pageParam}` },
       { title: user?.name || '', isDisabled: true },
     ],
     [user]
