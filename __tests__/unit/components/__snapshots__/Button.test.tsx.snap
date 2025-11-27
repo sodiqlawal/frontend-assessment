@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`The <Button /> component should match snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="py-2 px-4 text-sm leading-[1.43] rounded-[8px] font-medium cursor-pointer"
+  >
+    Submit
+  </button>
+</DocumentFragment>
+`;
