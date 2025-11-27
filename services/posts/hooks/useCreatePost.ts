@@ -3,10 +3,11 @@ import { Controller } from '@/hooks/useController';
 import { createPostAPI } from '@/services/posts/mutation';
 import { Post } from '@/types/post';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 type MutationContext = { previousPosts?: Post[] };
 
-export function useCreatePost(controller?:Controller) {
+export function useCreatePost(controller?: Controller) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -29,6 +30,8 @@ export function useCreatePost(controller?:Controller) {
       return { previousPosts };
     },
     onError: (err, newPost, context) => {
+      toast.error(err?.message || 'An unexpected error occurred');
+      
       // rollback logic using context.previousPosts
       queryClient.setQueryData(
         [EQueryKey.posts],

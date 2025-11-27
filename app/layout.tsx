@@ -1,6 +1,8 @@
 import QueryClientProviderWrapper from "@/components/shared/QueryClientProviderWrapper";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./globals.css";
 
 const inter = Inter({
@@ -24,9 +26,10 @@ export default function RootLayout({
         className={`${inter.className} antialiased`}
       >
         <QueryClientProviderWrapper>
-         <div className="max-w-[900px] px-[10px] pt-[60px] sm:pt-[132px] pb-[40px] mx-auto">
+          <div className="max-w-[900px] px-[10px] pt-[60px] sm:pt-[132px] pb-[40px] mx-auto">
             {children}
           </div>
+          <ToastContainer />
         </QueryClientProviderWrapper>
       </body>
     </html>

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   if (request.nextUrl.pathname === '/') {
     return NextResponse.rewrite(
       new URL('/users', request.url)

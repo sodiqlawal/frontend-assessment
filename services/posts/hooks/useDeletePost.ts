@@ -2,6 +2,7 @@ import { EQueryKey } from '@/constants/query-keys';
 import { deletePostAPI } from '@/services/posts/mutation';
 import { Post } from '@/types/post';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 export function useDeletePost() {
   const queryClient = useQueryClient();
@@ -21,6 +22,8 @@ export function useDeletePost() {
       return { previousPosts };
     },
     onError: (err, postId, context) => {
+      toast.error(err?.message || 'An unexpected error occurred');
+
       queryClient.setQueryData([EQueryKey.posts], context?.previousPosts);
     },
     onSettled: () => {
