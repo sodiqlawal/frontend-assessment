@@ -19,19 +19,17 @@ const tableHead: { name: keyof User; displayName: string }[] = [
 const Users = () => {
   const [page, setPage] = useState(1);
 
-  const { data: usersCount, isLoading: isCountLoading } = useQuery({
+  const { data: usersCount } = useQuery({
     queryKey: [EQueryKey.user_count],
     queryFn: () => fetchUsersCountAPI(),
   });
 
-  const { data, isLoading: isUsersLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [EQueryKey.users, page],
     queryFn: () =>
-      fetchUsersAPI({ pageNumber: page-1, pageSize: DEFAULT_PAGE_LIMIT }),
+      fetchUsersAPI({ pageNumber: page - 1, pageSize: DEFAULT_PAGE_LIMIT }),
     placeholderData: keepPreviousData,
   });
-
-  const isLoading = isCountLoading || isUsersLoading;
 
   const router = useRouter();
 

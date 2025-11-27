@@ -20,16 +20,12 @@ git --version
 Please go through the following steps to run this project locally:
 -  Install all the dependencies using `npm install`. 
 -  Start the project in development mode using `npm run dev`.
+-  Run the test suite using npm run test `npm run test`.
 
 ## Naming conventions
 * folders and `.ts` files follow the `kebab` convention
 * hooks follow the `camelCase` convention
 * components that return a `JSX.Element` like `.tsx` follow the `PascalCase` convention
-
-
-### `npm run test`
-Launches the test runner in the interactive watch mode.
-
 
 
 ## Technologies used 🛠️
