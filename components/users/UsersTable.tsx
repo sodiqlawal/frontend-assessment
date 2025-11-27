@@ -6,26 +6,22 @@ import Pagination from '../ui/Pagination';
 import { User } from '@/types/user';
 import Table from '../ui/Table';
 import { formatUserAddress } from '@/utils';
-
-interface UsersTableProps {
-  usersCount: number | undefined;
-  usersData: User[] | undefined;
-  isLoading: boolean;
-  onRowClick: (i: number) => void;
-  DEFAULT_PAGE_LIMIT: number;
-}
+import { fetchUsersAPI } from '@/services/users/query';
+import { EQueryKey } from '@/constants/query-keys';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 const tableHead: { name: keyof User; displayName: string }[] = [
   { name: 'name', displayName: 'Full name' },
   { name: 'email', displayName: 'Email address' },
   { name: 'address', displayName: 'Address' },
 ];
+interface UsersTableProps {
+  usersCount: number;
+  DEFAULT_PAGE_LIMIT: number;
+}
 
 export function UsersTable({
   usersCount,
-  usersData,
-  isLoading,
-  onRowClick,
   DEFAULT_PAGE_LIMIT,
 }: UsersTableProps) {
   const router = useRouter();
@@ -33,6 +29,13 @@ export function UsersTable({
 
   const pageParam = searchParams.get('page') ?? '1';
   const page = Number(pageParam);
+
+  const { data: usersData, isLoading } = useQuery({
+    queryKey: [EQueryKey.users, page],
+    queryFn: () =>
+      fetchUsersAPI({ pageNumber: page - 1, pageSize: DEFAULT_PAGE_LIMIT }),
+    placeholderData: keepPreviousData,
+  });
 
   const handlePageChange = useCallback(
     (newPage: number) => {
@@ -43,12 +46,19 @@ export function UsersTable({
     [router, searchParams]
   );
 
+  const handleRowClick = useCallback(
+    (i: number) => {
+      router.push(`/users/${usersData?.[i].id}/posts?page=${page}`);
+    },
+    [router, usersData, page]
+  );
+
   return (
     <div className='space-y-10'>
       <Table<User>
         fields={tableHead}
         isLoading={isLoading}
-        onRowClick={onRowClick}
+        onRowClick={handleRowClick}
         tableData={usersData || []}
         builder={(field, data) => {
           switch (field.name) {
@@ -65,7 +75,7 @@ export function UsersTable({
       />
       <Pagination
         currentPage={page}
-        totalPages={Math.ceil((usersCount || 0) / DEFAULT_PAGE_LIMIT)}
+        totalPages={Math.ceil(usersCount / DEFAULT_PAGE_LIMIT)}
         onPageChange={handlePageChange}
       />
     </div>
