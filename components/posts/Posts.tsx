@@ -5,10 +5,10 @@ import { User } from '@/types/user';
 import { cn } from '@/utils';
 import { useParams, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
-import BreadCrumb from './ui/BreadCrumb';
-import CreatePostCard from './ui/cards/CreatePostCard';
-import PostCard from './ui/cards/PostCard';
-import Loader from './ui/Loader';
+import BreadCrumb from '../ui/BreadCrumb';
+import CreatePostCard from '../ui/cards/CreatePostCard';
+import PostCard from '../ui/cards/PostCard';
+import Loader from '../ui/Loader';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 const Posts = () => {

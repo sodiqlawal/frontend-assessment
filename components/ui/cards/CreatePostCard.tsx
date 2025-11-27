@@ -1,4 +1,4 @@
-import CreatePostModal from '@/components/CreatePostModal';
+import CreatePostModal from '@/components/posts/CreatePostModal';
 import { Icons } from '@/components/icons';
 import useController from '@/hooks/useController';
 import { cn } from '@/utils';

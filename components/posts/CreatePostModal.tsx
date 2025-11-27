@@ -1,10 +1,10 @@
 import { Controller } from '@/hooks/useController';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useState } from 'react';
-import Button from './ui/Button';
-import Input from './ui/forms/Input';
-import TextArea from './ui/forms/TextArea';
-import Modal from './ui/Modal';
+import Button from '../ui/Button';
+import Input from '../ui/forms/Input';
+import TextArea from '../ui/forms/TextArea';
+import Modal from '../ui/Modal';
 import * as yup from 'yup';
 import { useParams } from 'next/navigation';
 import { useCreatePost } from '@/services/posts/hooks/useCreatePost';
