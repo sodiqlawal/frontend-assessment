@@ -1,6 +1,5 @@
 'use client';
-import { EMutationKey, EQueryKey } from '@/constants/query-keys';
-import { deletePostAPI } from '@/services/posts/mutation';
+import { EQueryKey } from '@/constants/query-keys';
 import { fetchPostsAPI } from '@/services/posts/query';
 import { User } from '@/types/user';
 import { cn } from '@/utils';
@@ -10,7 +9,7 @@ import BreadCrumb from './ui/BreadCrumb';
 import CreatePostCard from './ui/cards/CreatePostCard';
 import PostCard from './ui/cards/PostCard';
 import Loader from './ui/Loader';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 const Posts = () => {
   const params = useParams<{ 'user-id': string }>();
@@ -29,14 +28,6 @@ const Posts = () => {
     queryKey: [EQueryKey.posts],
     queryFn: () => fetchPostsAPI({ userId }),
     enabled: !!userId,
-  });
-
-  const { mutate } = useMutation({
-    mutationFn: deletePostAPI,
-    mutationKey: [EMutationKey.delete_post],
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [EQueryKey.posts] });
-    },
   });
 
   // retrieve the info of the user who made these posts
