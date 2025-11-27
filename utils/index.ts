@@ -60,5 +60,5 @@ export const getPagination = (
 
 export const formatUserAddress = (user: User) => {
   if (!user) return '';
-  return `${user.street}, ${user.city}, ${user.state}, ${user.zipcode}`;
+  return `${user.street}, ${user.state}, ${user.city}, ${user.zipcode}`;
 };
