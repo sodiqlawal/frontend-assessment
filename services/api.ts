@@ -4,7 +4,7 @@ import axios from 'axios';
 const api = axios.create({
   baseURL:
     process.env.NEXT_PUBLIC_API_URL ||
-    'https://quirky-frame-production.up.railway.app', // Base URL for the API
+    'https://web-developer-assignment-public-production.up.railway.app', // Base URL for the API
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
